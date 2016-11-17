@@ -1,0 +1,11 @@
+<!DOCTYPE validators PUBLIC
+        "-//Apache Struts//XWork Validator 1.0.2//EN"
+        "http://struts.apache.org/dtds/xwork-validator-1.0.2.dtd">
+
+<validators>
+    <field name="date.thing" >
+        <field-validator type="requiredstring" short-circuit="true">
+            <message key="check_null"/>
+        </field-validator>
+    </field>
+</validators>

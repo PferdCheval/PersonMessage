@@ -1,0 +1,16 @@
+<!DOCTYPE validators PUBLIC
+        "-//Apache Struts//XWork Validator 1.0.2//EN"
+        "http://struts.apache.org/dtds/xwork-validator-1.0.2.dtd">
+
+<validators>
+    <field name="file.title" >
+        <field-validator type="requiredstring" short-circuit="true">
+            <message key="check_null"/>
+        </field-validator>
+    </field>
+    <field name="upLoad" >
+        <field-validator type="required" short-circuit="true">
+            <message>请选择要上传的文件！</message>
+        </field-validator>
+    </field>
+</validators>

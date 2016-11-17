@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+	<struts>
+		<constant name="struts.devMode" value="true"></constant>
+		<!-- 配置国际化资源文件 -->
+		<constant name="struts.custom.i18n.resources" value="i18n"></constant>
+		<constant name="struts.multipart.maxSize" value="209715200"></constant>
+		<package name="user" namespace="/user" extends="struts-default">
+			<action name="show" >
+				<result>/Login/user_login.jsp</result>
+			</action>
+			
+			<action name="user_*" class="com.sn.action.loginAction" method="{1}">
+				<result name="{1}">/main.jsp</result>        
+            	<result name="login_input">/Login/user_login.jsp</result>
+            	<result name="register_input">/Login/user_register.jsp</result>
+				<result name="register">/WEB-INF/success.jsp?n=register</result>       		
+            	<result name="logout">/Login/user_login.jsp</result>
+            	<result name="no">/WEB-INF/error.jsp?n=login_false</result>	
+			</action>
+			<action name="personal_*" class="com.sn.action.personalAction" method="{1}">
+				<result name="{1}">/Personal/personal_{1}.jsp</result>
+				<result name="upInfo" type="redirect">personal_info</result>		
+				<result name="upPassword">/WEB-INF/success.jsp?n=upPassword</result>
+            	<result name="no">/WEB-INF/error.jsp</result>
+            	<result name="upInfo_input">/Personal/personal_showUpInfo.jsp</result>
+            	<result name="password_input">/Personal/personal_upPassword.jsp</result>
+            	<result name="no">/WEB-INF/error.jsp</result>
+			</action>
+		</package>
+		
+		<package name="friends" namespace="/friends" extends="struts-default">
+			<action name="friends_showEdit" class="com.sn.action.friendsAction" method="info">
+				<result name="info">/Friends/friends_showEdit.jsp</result>
+            	<result name="no">/WEB-INF/error.jsp</result>
+			</action>		
+			<action name="friends_*" class="com.sn.action.friendsAction" method="{1}">
+				<result name="{1}">/Friends/friends_{1}.jsp</result>
+				<result name="add" type="redirect">friends_info</result>
+				<result name="add_input">/Friends/friends_add.jsp</result>
+				<result name="upInfo_input">/Friends/friends_showUp.jsp</result>
+				<result name="delete" type="redirect">friends_showEdit</result>
+				<result name="upInfo" type="redirect">friends_showEdit</result>
+            	<result name="no">/WEB-INF/error.jsp</result>
+			</action>	
+		</package>		
+		<package name="dates" namespace="/dates" extends="struts-default">			
+			<action name="dates_*" class="com.sn.action.datesAction" method="{1}">
+				<result name="{1}">/DateManager/date_{1}.jsp</result>
+				<result name="add" type="redirect">dates_info</result>
+				<result name="add_input">/DateManager/date_add.jsp</result>
+				<result name="upInfo_input">/DateManager/date_showUp.jsp</result>
+				<result name="delete" type="redirect">dates_showEdit</result>
+				<result name="upInfo" type="redirect">dates_showEdit</result>
+            	<result name="no">/WEB-INF/error.jsp</result>
+			</action>
+			<action name="dates_showEdit" class="com.sn.action.datesAction" method="info">
+				<result name="info">/DateManager/date_showEdit.jsp</result>
+            	<result name="no">/WEB-INF/error.jsp</result>
+			</action>
+			
+		</package>
+		
+		<package name="files" namespace="/files" extends="struts-default"> 
+		 <result-types>
+   <!-- 用于处理下载文件点击取消时报出异常问题 -->
+  			 <result-type name="streamx" class="com.sunspoter.lib.web.struts2.dispatcher.StreamResultX"></result-type>
+ 		 </result-types>
+			<action name="files_*" class="com.sn.action.filesAction" method="{1}">
+				<result name="{1}">/FileManager/file_{1}.jsp</result>
+				<result name="upLoad">/WEB-INF/success.jsp?n=upLoad</result>
+				<result name="input">/FileManager/file_upLoad.jsp</result>
+				<result name="delete">/WEB-INF/success.jsp?n=file_delete</result>
+				<result name="delete_fail">/WEB-INF/error.jsp?n=file_delete</result>
+            	<result name="no">/WEB-INF/error.jsp</result>
+			</action>
+			<action name="files_showDownLoad" class="com.sn.action.filesAction" method="list">
+				<result name="list">/FileManager/file_downLoad.jsp</result>
+            	<result name="no">/WEB-INF/error.jsp</result>
+			</action>
+			<action name="files_downLoad" class="com.sn.action.filesAction" method="downLoad">		
+				<result type="streamx">
+					<param name="contentType">application/octet-stream</param>
+					<param name="inputName">inputStream</param>
+					<param name="contentDisposition">attachment;filename="${fileName}"</param>
+					<param name="bufferSize">4096</param>
+				</result>
+			</action>
+		</package>	
+	</struts>

@@ -1,0 +1,43 @@
+<!DOCTYPE validators PUBLIC
+        "-//Apache Struts//XWork Validator 1.0.2//EN"
+        "http://struts.apache.org/dtds/xwork-validator-1.0.2.dtd">
+
+<validators>
+    <field name="user.truename">
+        <field-validator type="requiredstring" short-circuit="true">
+            <message key="check_null"/>
+        </field-validator>
+    </field>
+    <field name="user.nation">
+        <field-validator type="requiredstring" short-circuit="true">
+            <message key="check_null"/>
+        </field-validator>
+    </field>
+    <field name="user.work">
+        <field-validator type="requiredstring" short-circuit="true">
+            <message key="check_null"/>
+        </field-validator>
+    </field>
+    <field name="user.phone">
+        <field-validator type="requiredstring" short-circuit="true">
+            <message key="check_null"/>
+        </field-validator>
+        <field-validator type="regex" short-circuit="true">
+            <param name="expression"><![CDATA[^1[358]\d{9}$]]></param>
+          <message>请输入有效的手机号码</message>
+        </field-validator>
+    </field>
+    <field name="user.place">
+        <field-validator type="requiredstring" short-circuit="true">
+            <message key="check_null"/>
+        </field-validator>
+    </field>
+    <field name="user.email">
+        <field-validator type="requiredstring" short-circuit="true">
+            <message key="check_null"/>
+        </field-validator>
+        <field-validator type="email" short-circuit="true">
+			<message>邮箱格式错误！</message>
+		</field-validator>
+    </field>
+</validators>
